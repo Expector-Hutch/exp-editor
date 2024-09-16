@@ -3,7 +3,6 @@ import { CodeEditor } from "./CodeEditor";
 import { KeyCode,KeyMod } from "monaco-editor";
 import hotkeys from 'hotkeys-js';
 
-// 设置环境
 self.MonacoEnvironment = {
     getWorkerUrl: function (_moduleId, label) {
         if (label === 'typescript' || label === 'javascript') {
