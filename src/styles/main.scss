@@ -1,8 +1,11 @@
+$bg-color: #222222;
+
 html,
 body {
     height: 100%;
     width: 100%;
     margin: 0;
+    background-color: $bg-color;
 }
 
 $footer-height: 22px;
@@ -14,6 +17,7 @@ main {
 }
 
 header {
+    display: flex;
     height: $header-height;
     width: 100%;
 }
@@ -25,4 +29,19 @@ footer {
 
 cursor-position {
     height: 100%;
+}
+
+.file-btn {
+    background-color: #555555;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    &:hover {
+        background-color: #777777;
+    }
 }

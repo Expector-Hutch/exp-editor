@@ -1,5 +1,7 @@
-import { open } from "@tauri-apps/plugin-dialog";
+import { open, save } from "@tauri-apps/plugin-dialog";
 import { CodeEditor } from "./CodeEditor";
+import { KeyCode,KeyMod } from "monaco-editor";
+import hotkeys from 'hotkeys-js';
 
 // 设置环境
 self.MonacoEnvironment = {
@@ -12,16 +14,45 @@ self.MonacoEnvironment = {
 };
 
 var maineditor = new CodeEditor(document.getElementsByTagName('main')[0], "");
-// maineditor.readFile("D:/oi/test.cpp");
 
-document.getElementById('btn-save')?.addEventListener('click', async () => {
-    await maineditor.writeFile("D:/oi/test.cpp");
-});
+async function saveFile() {
+    try {
+        await maineditor.saveFile();
+    } catch (error) {
+        if (error instanceof Error) {
+            if (error.message === "NoFileLinked") {
+                var filePath = await save();
+                if (filePath != null) {
+                    maineditor.linkFile(filePath);
+                    maineditor.saveFile();
+                }
+            } else {
+                console.error(error);
+            }
+        } else {
+            console.error(error);
+        }
+    }
+}
 
-document.getElementById('btn-open')?.addEventListener('click', async () => {
-    var filePath = await open({
-        directory: false,
-        multiple: false
-    });
+async function openFile() {
+    var filePath = await open();
     if (filePath != null) maineditor.loadFile(filePath);
-})
+}
+
+document.getElementById('btn-save')?.addEventListener('click', saveFile);
+hotkeys("ctrl+s", () => { saveFile(); });
+maineditor.addAction({
+    id:"save",
+    label:"Save File",
+    keybindings: [KeyMod.CtrlCmd | KeyCode.KeyS],
+    run: saveFile,
+});
+document.getElementById('btn-open')?.addEventListener('click', openFile);
+hotkeys("ctrl+o", () => { openFile(); });
+maineditor.addAction({
+    id:"open",
+    label:"Open File",
+    keybindings: [KeyMod.CtrlCmd | KeyCode.KeyO],
+    run: openFile,
+});
