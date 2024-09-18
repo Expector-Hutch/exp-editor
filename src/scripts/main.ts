@@ -41,7 +41,7 @@ async function openFile() {
 
 document.getElementById('btn-save')?.addEventListener('click', saveFile);
 hotkeys("ctrl+s", () => { saveFile(); });
-maineditor.addAction({
+maineditor.editor.addAction({
     id:"save",
     label:"Save File",
     keybindings: [KeyMod.CtrlCmd | KeyCode.KeyS],
@@ -49,9 +49,19 @@ maineditor.addAction({
 });
 document.getElementById('btn-open')?.addEventListener('click', openFile);
 hotkeys("ctrl+o", () => { openFile(); });
-maineditor.addAction({
+maineditor.editor.addAction({
     id:"open",
     label:"Open File",
     keybindings: [KeyMod.CtrlCmd | KeyCode.KeyO],
     run: openFile,
+});
+
+maineditor.editor.onDidChangeCursorPosition((_) => {
+    const currentPositionElement = document.getElementsByTagName("cursor-position")[0];
+    currentPositionElement.innerHTML = `行 ${maineditor.editor.getPosition()?.lineNumber}, 列 ${maineditor.editor.getPosition()?.column}`;
+});
+window.addEventListener("DOMContentLoaded", () => {
+    maineditor.editor.layout();
+    const currentPositionElement = document.getElementsByTagName("cursor-position")[0];
+    currentPositionElement.innerHTML = `行 ${maineditor.editor.getPosition()?.lineNumber}, 列 ${maineditor.editor.getPosition()?.column}`;
 });

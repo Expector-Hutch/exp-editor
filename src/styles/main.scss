@@ -23,11 +23,13 @@ header {
 }
 
 footer {
+    display: flex;
     height: $footer-height;
     width: 100%;
 }
 
 cursor-position {
+    color: #ffffff;
     height: 100%;
 }
 

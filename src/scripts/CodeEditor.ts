@@ -2,7 +2,7 @@ import * as monaco from 'monaco-editor';
 import { read_file, write_file } from './tauriInvokes';
 
 export class CodeEditor {
-    private editor: monaco.editor.IStandaloneCodeEditor;
+    editor: monaco.editor.IStandaloneCodeEditor;
     private linkedPath: string | null = null;
 
     constructor(container: HTMLElement, filePath: string | null) {
@@ -49,12 +49,10 @@ export class CodeEditor {
                 const content = this.editor.getValue();
                 await write_file(this.linkedPath, content);
             } catch (error) {
-                throw new Error("NoFileLinked");
+                throw new Error("NoFileLinked"); // 我知道这不好，但是有些 Bug 实在懒得排查
             }
         } else {
             throw new Error("NoFileLinked");
         }
     }
-
-    addAction(descriptor: monaco.editor.IActionDescriptor) { this.editor.addAction(descriptor); }
 }
