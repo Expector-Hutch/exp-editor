@@ -56,7 +56,6 @@ if (typeof window !== 'undefined') {
 
 const btn_saves = document.getElementsByClassName('btn-save');
 for (const btn_save of btn_saves) {
-    console.log(btn_save);
     btn_save.addEventListener('click', saveFile);
 }
 hotkeys("ctrl+s", () => { saveFile(); });
@@ -94,11 +93,11 @@ import { Window } from '@tauri-apps/api/window';
 const appWindow = new Window('main');
 
 document
-  .getElementById('titlebar-minimize')
-  ?.addEventListener('click', () => appWindow.minimize());
+    .getElementById('titlebar-minimize')
+    ?.addEventListener('click', () => appWindow.minimize());
 document
-  .getElementById('titlebar-maximize')
-  ?.addEventListener('click', () => appWindow.toggleMaximize());
+    .getElementById('titlebar-maximize')
+    ?.addEventListener('click', () => appWindow.toggleMaximize());
 document
-  .getElementById('titlebar-close')
-  ?.addEventListener('click', () => appWindow.close());
+    .getElementById('titlebar-close')
+    ?.addEventListener('click', () => appWindow.close());

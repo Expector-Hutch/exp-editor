@@ -12,24 +12,34 @@
 <body>
   <header data-tauri-drag-region>
     <img data-tauri-drag-region src="assets/icon.png">
-    <menu-box data-tauri-drag-region>
-      <button class="father-btn menu-btn">文件</button>
-      <div class="menu-tmp" style="display: none;">
-        <menu>
-          <li><button class="child-btn btn-open menu-btn" onclick="openFile()">打开</button></li>
-          <li><button class="child-btn btn-save menu-btn" onclick="saveFile()">保存</button></li>
-        </menu>
-      </div>
-    </menu-box>
+    <div class="titlebar-menu" data-tauri-drag-region>
+      <menu-box>
+        <button class="father-btn menu-btn" data-liking-tmp="menu-file">文件</button>
+        <div class="menu-tmp" style="display: none;" id="menu-file">
+          <menu>
+            <li><button class="child-btn btn-open menu-btn" onclick="openFile()">打开</button></li>
+            <li><button class="child-btn btn-save menu-btn" onclick="saveFile()">保存</button></li>
+          </menu>
+        </div>
+      </menu-box>
+      <menu-box>
+        <button class="father-btn menu-btn" data-liking-tmp="menu-run">运行</button>
+        <div class="menu-tmp" style="display: none;" id="menu-run">
+          <menu>
+            <li><button class="child-btn menu-btn">运行</button></li>
+          </menu>
+        </div>
+      </menu-box>
+    </div>
     <div class="window-buttons-box">
       <div class="titlebar-button" id="titlebar-minimize">
-        <img src="assets/window-buttons/minisize.svg" alt="minimize" width="13px" height="13px"/>
+        <img src="assets/window-buttons/minisize.svg" alt="minimize" width="13px" height="13px" />
       </div>
       <div class="titlebar-button" id="titlebar-maximize">
-        <img src="assets/window-buttons/maxisize.svg" alt="maximize" width="13px" height="13px"/>
+        <img src="assets/window-buttons/maxisize.svg" alt="maximize" width="13px" height="13px" />
       </div>
       <div class="titlebar-button" id="titlebar-close">
-        <img src="assets/window-buttons/close.svg" alt="close" width="13px" height="13px"/>
+        <img src="assets/window-buttons/close.svg" alt="close" width="13px" height="13px" />
       </div>
     </div>
   </header>

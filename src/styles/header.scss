@@ -9,8 +9,9 @@ header {
         padding: 3px;
     }
 
-    menu-box {
+    .titlebar-menu {
         flex-grow: 1;
+        display: flex;
     }
 
     menu {
