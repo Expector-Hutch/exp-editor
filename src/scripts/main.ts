@@ -1,7 +1,10 @@
 import { open, save } from "@tauri-apps/plugin-dialog";
 import { CodeEditor } from "./CodeEditor";
-import { KeyCode,KeyMod } from "monaco-editor";
+import { KeyCode, KeyMod } from "monaco-editor";
 import hotkeys from 'hotkeys-js';
+import { initHeader } from "./header";
+
+initHeader();
 
 self.MonacoEnvironment = {
     getWorkerUrl: function (_moduleId, label) {
@@ -14,7 +17,7 @@ self.MonacoEnvironment = {
 
 var maineditor = new CodeEditor(document.getElementsByTagName('main')[0], "");
 
-async function saveFile() {
+export async function saveFile() {
     try {
         await maineditor.saveFile();
     } catch (error) {
@@ -34,24 +37,44 @@ async function saveFile() {
     }
 }
 
-async function openFile() {
+export async function openFile() {
     var filePath = await open();
     if (filePath != null) maineditor.loadFile(filePath);
 }
 
-document.getElementById('btn-save')?.addEventListener('click', saveFile);
+declare global {
+    interface Window {
+        saveFile: () => void;
+        openFile: () => void;
+    }
+}
+
+if (typeof window !== 'undefined') {
+    window.saveFile = saveFile;
+    window.openFile = openFile;
+}
+
+const btn_saves = document.getElementsByClassName('btn-save');
+for (const btn_save of btn_saves) {
+    console.log(btn_save);
+    btn_save.addEventListener('click', saveFile);
+}
 hotkeys("ctrl+s", () => { saveFile(); });
 maineditor.editor.addAction({
-    id:"save",
-    label:"Save File",
+    id: "save",
+    label: "Save File",
     keybindings: [KeyMod.CtrlCmd | KeyCode.KeyS],
     run: saveFile,
 });
-document.getElementById('btn-open')?.addEventListener('click', openFile);
+
+const btn_opens = document.getElementsByClassName('btn-open');
+for (const btn_open of btn_opens) {
+    btn_open.addEventListener('click', openFile);
+}
 hotkeys("ctrl+o", () => { openFile(); });
 maineditor.editor.addAction({
-    id:"open",
-    label:"Open File",
+    id: "open",
+    label: "Open File",
     keybindings: [KeyMod.CtrlCmd | KeyCode.KeyO],
     run: openFile,
 });

@@ -11,12 +11,20 @@
 
 <body>
   <header>
-    <button class="file-btn" id="btn-open">打开</button>
-    <button class="file-btn" id="btn-save">保存</button>
+    <menu-box>
+      <button class="father-btn menu-btn">文件</button>
+      <div class="menu-tmp" style="display: none;">
+        <menu>
+          <li><button class="child-btn btn-open menu-btn" onclick="openFile()">打开</button></li>
+          <li><button class="child-btn btn-save menu-btn" onclick="saveFile()">保存</button></li>
+        </menu>
+      </div>
+    </menu-box>
   </header>
   <main></main>
   <footer>
-    <cursor-position></cursor-position>
+    <left-footer></left-footer>
+    <right-footer><cursor-position></cursor-position></right-footer>
   </footer>
 </body>
 

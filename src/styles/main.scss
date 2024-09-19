@@ -1,4 +1,7 @@
-$bg-color: #222222;
+@use './defines' as *;
+@import 'tippy.js/dist/tippy.css';
+
+@import './header.scss';
 
 html,
 body {
@@ -8,17 +11,8 @@ body {
     background-color: $bg-color;
 }
 
-$footer-height: 22px;
-$header-height: 22px;
-
 main {
     height: calc(100% - $header-height - $footer-height);
-    width: 100%;
-}
-
-header {
-    display: flex;
-    height: $header-height;
     width: 100%;
 }
 
@@ -26,24 +20,10 @@ footer {
     display: flex;
     height: $footer-height;
     width: 100%;
+    justify-content: space-between;
 }
 
 cursor-position {
     color: #ffffff;
     height: 100%;
-}
-
-.file-btn {
-    background-color: #555555;
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    &:hover {
-        background-color: #777777;
-    }
 }
