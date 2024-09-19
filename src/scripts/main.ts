@@ -88,3 +88,17 @@ window.addEventListener("DOMContentLoaded", () => {
     const currentPositionElement = document.getElementsByTagName("cursor-position")[0];
     currentPositionElement.innerHTML = `行 ${maineditor.editor.getPosition()?.lineNumber}, 列 ${maineditor.editor.getPosition()?.column}`;
 });
+
+import { Window } from '@tauri-apps/api/window';
+
+const appWindow = new Window('main');
+
+document
+  .getElementById('titlebar-minimize')
+  ?.addEventListener('click', () => appWindow.minimize());
+document
+  .getElementById('titlebar-maximize')
+  ?.addEventListener('click', () => appWindow.toggleMaximize());
+document
+  .getElementById('titlebar-close')
+  ?.addEventListener('click', () => appWindow.close());

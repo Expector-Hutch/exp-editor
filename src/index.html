@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh">
 
 <head>
   <meta charset="UTF-8" />
@@ -10,8 +10,9 @@
 </head>
 
 <body>
-  <header>
-    <menu-box>
+  <header data-tauri-drag-region>
+    <img data-tauri-drag-region src="assets/icon.png">
+    <menu-box data-tauri-drag-region>
       <button class="father-btn menu-btn">文件</button>
       <div class="menu-tmp" style="display: none;">
         <menu>
@@ -20,6 +21,17 @@
         </menu>
       </div>
     </menu-box>
+    <div class="window-buttons-box">
+      <div class="titlebar-button" id="titlebar-minimize">
+        <img src="assets/window-buttons/minisize.svg" alt="minimize" width="13px" height="13px"/>
+      </div>
+      <div class="titlebar-button" id="titlebar-maximize">
+        <img src="assets/window-buttons/maxisize.svg" alt="maximize" width="13px" height="13px"/>
+      </div>
+      <div class="titlebar-button" id="titlebar-close">
+        <img src="assets/window-buttons/close.svg" alt="close" width="13px" height="13px"/>
+      </div>
+    </div>
   </header>
   <main></main>
   <footer>

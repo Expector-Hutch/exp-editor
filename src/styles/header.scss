@@ -5,11 +5,20 @@ header {
     height: $header-height;
     width: 100%;
 
+    .tippy-content {
+        padding: 3px;
+    }
+
+    menu-box {
+        flex-grow: 1;
+    }
+
     menu {
         list-style: none;
         padding: 0;
         margin: 0;
     }
+
     .menu-btn {
         background-color: #555555;
         border: none;
@@ -24,5 +33,19 @@ header {
         &:hover {
             background-color: #777777;
         }
+    }
+
+    .titlebar-button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 25px;
+        height: 100%;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .titlebar-button:hover {
+        background: #00000077;
     }
 }
